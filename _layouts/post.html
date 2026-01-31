@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <style>
+        /* 1. 整体阅读环境设置 */
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #f7f3e8; /* 经典的护眼羊皮纸色 */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8; /* 行间距大一点，看书不累 */
+            font-size: 18px; /* 字体大一点，手机看才舒服 */
+        }
+        
+        /* 2. 限制内容宽度，模拟书本 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f3e8;
+            min-height: 100vh;
+        }
+
+        /* 3. 标题样式 */
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #5a4a42;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: #5a4a42;
+        }
+
+        /* 4. 底部翻页按钮区域 */
+        .navigation {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between; /* 让按钮一个在左，一个在右 */
+        }
+
+        .btn {
+            text-decoration: none;
+            color: #fff;
+            background-color: #8b7063; /* 咖啡色按钮 */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn:hover { background-color: #5a4a42; }
+        .btn-disabled { background-color: #ccc; pointer-events: none; } /* 没章节时变灰 */
+
+        /* 5. 顶部导航 */
+        .top-nav { margin-bottom: 20px; font-size: 14px; }
+        .top-nav a { text-decoration: none; color: #888; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-nav">
+        <a href="/">← 返回书架目录</a>
+    </div>
+
+    <h1>{{ page.title }}</h1>
+
+    <div class="content">
+        {{ content }}
+    </div>
+
+    <div class="navigation">
+        {% if page.previous %}
+            <a href="{{ page.previous.url }}" class="btn">上一章</a>
+        {% else %}
+            <span class="btn btn-disabled">无上一章</span>
+        {% endif %}
+
+        {% if page.next %}
+            <a href="{{ page.next.url }}" class="btn">下一章</a>
+        {% else %}
+            <span class="btn btn-disabled">无下一章</span>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
